@@ -1,0 +1,241 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0a192f;
+  padding: 4rem 2rem;
+}
+
+.backgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Blueprint Grid */
+.blueprintGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(64, 156, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 156, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+  animation: gridPulse 4s infinite ease-in-out;
+}
+
+/* Connection Lines */
+.connectionLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(64, 156, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 20% 30%, rgba(64, 156, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(64, 156, 255, 0.2) 0%, transparent 50%);
+  opacity: 0.5;
+  animation: pulseLines 3s infinite ease-in-out;
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseLines {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 
+    0 0 20px rgba(64, 156, 255, 0.3),
+    0 0 40px rgba(64, 156, 255, 0.2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.textContent {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.textContent p {
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+/* Advisor Grid */
+.advisorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.advisorCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(64, 156, 255, 0.2);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.advisorCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(64, 156, 255, 0.2) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.advisorCard:hover::before {
+  opacity: 1;
+}
+
+.advisorImage {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
+
+.advisorImage img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.glowEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(64, 156, 255, 0.3) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.advisorCard:hover .glowEffect {
+  opacity: 1;
+}
+
+.advisorCard:hover .advisorImage img {
+  transform: scale(1.1);
+}
+
+.advisorInfo {
+  padding: 1.5rem;
+  background: rgba(10, 25, 47, 0.8);
+}
+
+.advisorInfo h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.advisorTitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Gradient Overlay */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 25, 47, 0.9),
+    rgba(10, 25, 47, 0.7),
+    rgba(10, 25, 47, 0.9)
+  );
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .advisorGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .content {
+    padding: 2rem;
+  }
+
+  .advisorGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Add smooth transition for all animations */
+.content * {
+  transition: all 0.4s ease-out;
+} 
