@@ -1,10 +1,10 @@
 .container {
-  position: relative;
   min-height: 100vh;
   width: 100%;
+  position: relative;
   overflow: hidden;
-  background-color: #000;
-  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #000, #111);
+  padding: var(--spacing-xl) 0;
 }
 
 .backgroundContainer {
@@ -13,23 +13,205 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) contrast(1.2);
+}
+
+.gradientOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7)
+  );
 }
 
-.backgroundImage img {
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--spacing-md);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.juryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+}
+
+.juryCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--blur-md);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.juryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 133.33%; /* 4:3 aspect ratio */
+  overflow: hidden;
+}
+
+.juryImage {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3) contrast(1.2);
-  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.juryCard:hover .juryImage {
+  transform: scale(1.05);
+}
+
+.juryInfo {
+  padding: var(--spacing-md);
+}
+
+.juryName {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: var(--spacing-xs);
+}
+
+.juryTitle {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--spacing-sm);
+}
+
+.juryBio {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .juryGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-md);
+  }
+
+  .juryGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+
+  .juryName {
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-md) 0;
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-sm);
+  }
+
+  .juryGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .juryInfo {
+    padding: var(--spacing-sm);
+  }
+
+  .juryName {
+    font-size: var(--font-size-sm);
+  }
+
+  .juryTitle,
+  .juryBio {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 360px) {
+  .juryInfo {
+    padding: var(--spacing-xs);
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animateIn {
+  animation: fadeIn 0.6s ease forwards;
 }
 
 /* Justice Scale Animation */
@@ -56,14 +238,6 @@
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem;
 }
 
 .headline {
@@ -182,39 +356,6 @@
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
   font-style: italic;
-}
-
-/* Gradient Overlay */
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 0, 0, 0.7),
-    rgba(0, 0, 0, 0.9)
-  );
-  z-index: 1;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding: 2rem 1rem;
-  }
-
-  .content {
-    padding: 2rem;
-  }
-
-  .jurorGrid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
 }
 
 /* Add smooth transition for all animations */

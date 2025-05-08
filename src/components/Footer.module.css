@@ -1,13 +1,10 @@
 .container {
-  position: relative;
   min-height: 60vh;
   width: 100%;
+  position: relative;
   overflow: hidden;
-  background-color: #000;
-  padding: 4rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #000;
+  padding: var(--spacing-xl) 0;
 }
 
 .backgroundContainer {
@@ -16,23 +13,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  z-index: 1;
 }
 
 .backgroundImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.backgroundImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3) contrast(1.2) saturate(0.8);
-  transform: scale(1.1);
+  filter: brightness(0.3) contrast(1.2);
 }
 
 .gradientOverlay {
@@ -43,24 +31,48 @@
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.95),
     rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0.95)
+    rgba(0, 0, 0, 0.9)
   );
-  z-index: 1;
 }
 
 .content {
   position: relative;
   z-index: 2;
-  max-width: 1000px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 3rem;
+  padding: 0 var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
   text-align: center;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 30px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quote {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: var(--spacing-lg);
+  max-width: 800px;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtext {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.copyright {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
 }
 
 .glowEffect {
@@ -68,67 +80,85 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 150%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
     circle at center,
     rgba(255, 255, 255, 0.1) 0%,
     transparent 70%
   );
   pointer-events: none;
-  z-index: -1;
 }
 
-.quote {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin-bottom: 2rem;
-  text-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.3),
-    0 0 40px rgba(255, 255, 255, 0.2);
-}
-
-.subtext {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1.5rem;
-}
-
-.subtext strong {
-  color: #fff;
-  font-weight: 600;
-}
-
-.copyright {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 2rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding: 3rem 1rem;
-    min-height: 50vh;
-  }
-
-  .content {
-    padding: 2rem 1.5rem;
-  }
-
+/* Responsive Design */
+@media (max-width: 1024px) {
   .quote {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-size: var(--font-size-xl);
   }
 
   .subtext {
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-size: var(--font-size-md);
   }
 }
 
-/* Add smooth transition for all animations */
-.content * {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .quote {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .subtext {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .copyright {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--spacing-md) 0;
+  }
+
+  .quote {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .subtext {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .content {
+    padding: var(--spacing-xs);
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animateIn {
+  animation: fadeIn 0.6s ease forwards;
 } 
